@@ -267,6 +267,11 @@ else (APPLE)
       set(CMAKE_C_FLAGS_RELWITHDEBINFO   "/MT /W4 /Zi /O2 /Ob1 /DNDEBUG")
       set(CMAKE_EXE_LINKER_FLAGS         "/DYNAMICBASE:NO")
    else (MSVC)
+      if (HAIKU)
+         # This is necessary for genManual to be executed during the build phase,
+         # it needs to be able to get the Qt libs.
+         SET(CMAKE_SKIP_RPATH TRUE)
+      endif (HAIKU)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
       if (MINGW)
          # -mno-ms-bitfields see #22048
