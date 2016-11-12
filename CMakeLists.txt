@@ -114,11 +114,20 @@ if (APPLE)
       option(BUILD_ALSA ${MAC_NOT_AVAIL} OFF)
 endif (APPLE)
 
+# Disable components not supported on Haiku
+if (HAIKU)
+      set(HAIKU_NOT_AVAIL "Not available on Haiku")
+      option(BUILD_PULSEAUDIO ${HAIKU_NOT_AVAIL} OFF)
+      option(BUILD_ALSA ${HAIKU_NOT_AVAIL} OFF)
+      option(BUILD_JACK ${HAIKU_NOT_AVAIL} OFF)
+      option(BUILD_PORTAUDIO ${HAIKU_NOT_AVAIL} OFF)
+endif (HAIKU)
+
 # Disable components not supported on Linux/BSD
-if (NOT APPLE AND NOT MINGW AND NOT MSVC)
+if (NOT APPLE AND NOT MINGW AND NOT MSVC AND NOT HAIKU)
       set(NIX_NOT_AVAIL "Not available on Linux/BSD")
       #option(BUILD_PORTMIDI "PortMidi disabled on Linux. (It uses ALSA but it's better to use ALSA directly)" OFF)
-endif (NOT APPLE AND NOT MINGW AND NOT MSVC)
+endif (NOT APPLE AND NOT MINGW AND NOT MSVC AND NOT HAIKU)
 
 option(AEOLUS        "Enable pipe organ synthesizer"      OFF)
 option(ZERBERUS      "Enable experimental SFZ sampler"    ON)
