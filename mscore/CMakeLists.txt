@@ -757,8 +757,6 @@ else (MINGW)
 
       if (APPLE)
         target_link_libraries(mscore ${OsxFrameworks})
-      else (APPLE)
-          target_link_libraries(mscore rt)
       endif (APPLE)
 
       # 'gold' does not use indirect shared libraries for symbol resolution, Linux only
@@ -766,7 +764,9 @@ else (MINGW)
          if(USE_JACK)
             target_link_libraries(mscore ${CMAKE_DL_LIBS})
          endif(USE_JACK)
-         target_link_libraries(mscore rt)
+         if (NOT HAIKU)
+            target_link_libraries(mscore rt)
+         endif (NOT HAIKU)
       endif (NOT APPLE)
 
       if (APPLE)
