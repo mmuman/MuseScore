@@ -49,7 +49,7 @@
 #include <vorbis/vorbisfile.h>
 
 #ifdef USE_PORTMIDI
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+#if defined(Q_OS_MAC) || defined(Q_OS_WIN) || defined(Q_OS_HAIKU)
   #include "portmidi/porttime/porttime.h"
 #else
   #include <porttime.h>
